@@ -13,9 +13,9 @@
         <h1>在线式机器学习算法运行可视化系统</h1>
     </div>
     <div class="left_contr">
-        <button>开始</button>
-        <button>暂停</button>
-        <button>重置</button>
+        <button onclick="ws_send_button(message='start')">开始</button>
+        <button onclick="ws_send_button(message='continue')">继续</button>
+        <button onclick="ws_send_button(message='stop')">停止</button>
     </div>
     <div class="right_display">
         <div class="display_top">
@@ -40,6 +40,27 @@
     </div>
 
     <script>
+        // Websocket
+        var ws = new WebSocket("ws://localhost:8123/oml");
+        ws.onopen = function () {
+            // Web Socket 已连接上，使用 send() 方法发送数据
+            ws.send("建立连接");
+        };
+
+        ws.onmessage = function (evt) {
+            var received_msg = evt.data;
+            console.log(received_msg)
+        };
+
+        ws.onclose = function () {
+            // 关闭 websocket
+            console.log("连接已关闭...");
+        };
+        function ws_send_button(message) {
+            ws.send(message)
+        }
+
+        // Loss 图表
         var myChart1 = echarts.init(document.getElementById('tu1'));
         var option1 = {
             title: {
@@ -62,7 +83,7 @@
         };
         myChart1.setOption(option1);
 
-
+        //ACC 图表
         var myChart2 = echarts.init(document.getElementById('tu2'));
         var option2 = {
             title: {
