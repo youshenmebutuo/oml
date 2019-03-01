@@ -17,7 +17,7 @@ import threading
 
 class Index(RequestHandler):
     def get(self):
-        self.render("templates/test.html")
+        self.render("templates/oml_html.html")
 
 
 class WebSocket(WebSocketHandler):
@@ -58,10 +58,13 @@ class WebSocket(WebSocketHandler):
 
 
 def make_app():
+    settings = {
+        "static_path": os.path.join(os.path.dirname(__file__), "static")
+    }  # 配置静态文件路径
     return tornado.web.Application([
         ('/', Index),
         ('/oml', WebSocket),
-    ])
+    ], **settings)
 
 
 if __name__ == "__main__":

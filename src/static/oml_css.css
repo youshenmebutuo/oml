@@ -1,0 +1,71 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.main_title{
+    background-color: rgb(53, 169, 236);
+    color: blanchedalmond;
+    padding: 20px;
+}
+h1{
+    margin: 0;
+    text-align: center;
+}
+.left_contr{
+    width: 180px;
+    position: absolute;
+    top: 83px;
+    left: 0px;
+}
+.right_display{
+    position: absolute;
+    top: 83px;
+    min-width: 900px;
+    left: 180px;
+    right: 180px;
+    bottom: 0px;
+    border: 1px solid grey;
+}
+.diagram1,.diagram2,.diagram3{
+    margin: 15px;
+    border: 1px solid #5FACB8;
+}
+.display_top,.display_bottom{
+    height: 100%;
+    display: flex;
+    flex: 1 auto;
+    justify-content: center;
+    align-items: center;
+}
+h3{
+    margin: 0;
+    background-color: lightblue;
+    color: #5FACB8;
+}
+.diagram1,.diagram2{
+    width: 420px;
+    height: 350px;
+}
+h4{
+    margin: 0;
+}
+#tu1,#tu2{
+    width: 380px;
+    height: 280px;
+    margin: 5px;
+}
+.diagram3{
+    width: 755px;
+    height: 200px;
+}
+button{
+    width: 80px;
+    height: 80px;
+    margin: 25px;
+    border-radius: 50%;
+    margin-left: 80px;
+    background: rgb(53, 169, 236);
+    color: blanchedalmond;
+    font-size: 25px;
+    font-weight: 700;
+}

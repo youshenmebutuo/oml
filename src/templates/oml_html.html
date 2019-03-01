@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>在线式机器学习算法运行可视化系统</title>
+    <link rel="stylesheet" href="../static/oml_css.css">
+    <script src="../static/echarts.js"></script>
+</head>
+
+<body>
+    <div class="main_title">
+        <h1>在线式机器学习算法运行可视化系统</h1>
+    </div>
+    <div class="left_contr">
+        <button>开始</button>
+        <button>暂停</button>
+        <button>重置</button>
+    </div>
+    <div class="right_display">
+        <div class="display_top">
+            <div class="diagram1">
+                <h3>1 title</h3>
+                <div id="tu1"></div>
+                <h4 id="data1">xxx</h4>
+            </div>
+            <div class="diagram2">
+                <h3>2 title</h3>
+                <div id="tu2"></div>
+                <h4 id="data2">xxx</h4>
+            </div>
+        </div>
+        <!-- <div class="display_bottom">
+                <div class="diagram3">
+                    <h3>3 title</h3>
+                    <div></div>
+                    <h4 id="data3">xxx</h4>
+                </div>
+            </div> -->
+    </div>
+
+    <script>
+        var myChart1 = echarts.init(document.getElementById('tu1'));
+        var option1 = {
+            title: {
+                text: 'ECharts 示例1'
+            },
+            tooltip: {},
+            xAxis: {
+                boundaryGap: false,
+                data: ["0", "1", "2", "3", "4", "5"]
+            },
+            yAxis: {
+                boundaryGap: false,
+                data: ['0', '100', '200', '300', '400']
+            },
+            series: [{
+                name: 'type1',
+                type: 'line',
+                data: ['0', '200', '300', '100', '400', '200']
+            }]
+        };
+        myChart1.setOption(option1);
+
+
+        var myChart2 = echarts.init(document.getElementById('tu2'));
+        var option2 = {
+            title: {
+                text: 'ECharts 示例2'
+            },
+            tooltip: {},
+            xAxis: {
+                boundaryGap: false,
+                data: ["0", "1", "2", "3", "4", "5"]
+            },
+            yAxis: {
+                boundaryGap: false,
+                type: 'value',
+                data: ['0', '100', '200', '300', '400']
+            },
+            series: [{
+                name: 'type1',
+                type: 'line',
+                data: ['0', '50', '310', '100', '400', '200']
+            }]
+        };
+        myChart2.setOption(option2);
+    </script>
+</body>
+
+</html>
