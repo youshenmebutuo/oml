@@ -65,7 +65,7 @@ def test():
     """测试"""
     # 加载数据
     (train_images, train_labels), (test_images,
-                                   test_labels) = load_data(path='mnist.npz')
+                                   test_labels) = load_data(path=settings.data_path)
     # 创建模型
     model = create_model()
     # 训练模型
