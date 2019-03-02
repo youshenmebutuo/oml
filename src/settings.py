@@ -12,3 +12,6 @@ redis_queue_name = "test_message:queue"
 
 # 数据集设置
 data_path = cwd + "/mnist.npz"
+
+# tornado 端口设置
+port = 8123
