@@ -40,7 +40,6 @@ class WebSocket(WebSocketHandler):
 
     def on_message(self, message):
         print(message)
-        self.write_message("get message:" + message)
         if message == 'start':
             WebSocket.spout = subprocess.Popen(
                 ['python', '/home/yc/VSCode/Python/oml/src/main.py'])

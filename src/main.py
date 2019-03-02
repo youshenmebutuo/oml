@@ -11,8 +11,8 @@ def run():
     (train_images, train_labels), (test_images,
                                    test_labels) = oml.load_data(path=settings.data_path)
     model = oml.create_model()
-    # train_set_size = len(train_labels)
-    train_set_size = 1000
+    train_set_size = len(train_labels)
+    # train_set_size = 1000
     trained_num = 0
     loss, acc = oml.test_model(model, test_images, test_labels)
     oml.save_test_data(rcon, trained_num, loss, acc)

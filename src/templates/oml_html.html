@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>在线式机器学习算法运行可视化系统</title>
-    <link rel="stylesheet" href="../static/oml_css.css">
+    <link rel="stylesheet" href="{{ static_url('oml_css.css') }}">
     <script src="../static/echarts.js"></script>
 </head>
 
@@ -20,14 +20,14 @@
     <div class="right_display">
         <div class="display_top">
             <div class="diagram1">
-                <h3>1 title</h3>
+                <!-- <h3>1 title</h3> -->
                 <div id="tu1"></div>
-                <h4 id="data1">xxx</h4>
+                <h4 id="data1">Loss:</h4>
             </div>
             <div class="diagram2">
-                <h3>2 title</h3>
+                <!-- <h3>2 title</h3> -->
                 <div id="tu2"></div>
-                <h4 id="data2">xxx</h4>
+                <h4 id="data2">Accuracy:</h4>
             </div>
         </div>
         <!-- <div class="display_bottom">
@@ -40,6 +40,10 @@
     </div>
 
     <script>
+        var xgroup = [];
+        var x = 0;
+        var liney = [];
+        var liney2 = [];
         // Websocket
         var ws = new WebSocket("ws://localhost:8123/oml");
         ws.onopen = function () {
@@ -48,8 +52,16 @@
         };
 
         ws.onmessage = function (evt) {
-            var received_msg = evt.data;
-            console.log(received_msg)
+            var received_msg = '[' + evt.data + ']';
+            received_msg = JSON.parse(received_msg)
+            console.log(received_msg);
+            x = x + 1;
+            xgroup.push(x);
+            var y = received_msg[0].y_loss;
+            var y2 = received_msg[0].y_acc;
+            liney.push(y);
+            liney2.push(y2);
+            display(received_msg);
         };
 
         ws.onclose = function () {
@@ -60,52 +72,60 @@
             ws.send(message)
         }
 
+        function display(message) {
+            document.getElementById("data1").innerHTML = "    Loss:" + Math.round(message[0].y_loss * 10000) / 10000;
+            document.getElementById("data2").innerHTML = "    Accuracy:" + Math.round(message[0].y_acc * 10000) / 100 + '%';
+        }
+
         // Loss 图表
         var myChart1 = echarts.init(document.getElementById('tu1'));
         var option1 = {
             title: {
-                text: 'ECharts 示例1'
+                text: 'Loss'
             },
+            color: 'green',
             tooltip: {},
             xAxis: {
                 boundaryGap: false,
-                data: ["0", "1", "2", "3", "4", "5"]
+                data: xgroup
             },
             yAxis: {
                 boundaryGap: false,
-                data: ['0', '100', '200', '300', '400']
+                type: 'value',
+                data: ['0', '1', '2', '3']
             },
             series: [{
                 name: 'type1',
                 type: 'line',
-                data: ['0', '200', '300', '100', '400', '200']
+                data: liney
             }]
         };
-        myChart1.setOption(option1);
+        setInterval(function () {
+            myChart1.setOption(option1);
+            myChart2.setOption(option2);
+        }, 2000);
 
         //ACC 图表
         var myChart2 = echarts.init(document.getElementById('tu2'));
         var option2 = {
             title: {
-                text: 'ECharts 示例2'
+                text: 'Accuracy'
             },
             tooltip: {},
             xAxis: {
                 boundaryGap: false,
-                data: ["0", "1", "2", "3", "4", "5"]
+                data: xgroup
             },
             yAxis: {
                 boundaryGap: false,
-                type: 'value',
-                data: ['0', '100', '200', '300', '400']
+                type: 'value'
             },
             series: [{
                 name: 'type1',
                 type: 'line',
-                data: ['0', '50', '310', '100', '400', '200']
+                data: liney2
             }]
         };
-        myChart2.setOption(option2);
     </script>
 </body>
 
