@@ -3,4 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-model/*.h5
+src/model/*.h5
+
+.vscode/*
