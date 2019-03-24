@@ -23,6 +23,7 @@ class Index(RequestHandler):
 class WebSocket(WebSocketHandler):
     clients = set()
     rcon = oml.redis_init()
+    spout = None
 
     def listen_task(self):
         asyncio.set_event_loop(asyncio.new_event_loop())
@@ -54,6 +55,7 @@ class WebSocket(WebSocketHandler):
 
     def on_close(self):
         WebSocket.clients.remove(self)
+        WebSocket.spout.send_signal(subprocess.signal.SIGKILL)
 
 
 def make_app():
